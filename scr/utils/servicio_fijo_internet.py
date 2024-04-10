@@ -25,9 +25,9 @@ class Servicio_Fijo_Internet():
                         INSERT INTO sf_internet (
                             razon_social, nombre_comercial, costo_instalacion, 
                             tipo_pago, otros_beneficios, nombre_tarifa_plan, ancho_banda_bajada, precio_mensual, 
-                            ancho_banda_subida, denominacion_tecnologia, fecha_create
+                            ancho_banda_subida, denominacion_tecnologia,departamento, fecha_create
                         ) VALUES (
-                            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                         )
                     """, (
                         servicio.get('RAZON_SOCIAL', ''),
@@ -40,6 +40,7 @@ class Servicio_Fijo_Internet():
                         conv.numeroFlotante(servicio.get('PRECIO_MENSUAL', "0")),
                         conv.numeroEntero(servicio.get('ANCHO_BANDA_SUBIDA', "0")),
                         servicio.get('DENOMINACION_TECNOLOGIA', ''),
+                        servicio.get('DEPARTAMENTO', ''),
                         fec.generar_fecha_aleatoria()
                     ))
                     conn.commit()

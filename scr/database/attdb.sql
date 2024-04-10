@@ -43,6 +43,7 @@ CREATE TABLE sf_internet (
     precio_mensual DECIMAL(10,2) NOT NULL,
     ancho_banda_subida INTEGER NOT NULL,
     denominacion_tecnologia VARCHAR(100) NOT NULL,
+    departamento VARCHAR(100),
     fecha_create DATE NOT NULL
 );
 

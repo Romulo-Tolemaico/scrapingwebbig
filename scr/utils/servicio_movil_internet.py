@@ -9,16 +9,13 @@ class Servicio_Movil_Internet():
     def almacenar():
         conn = db.get_connection()
         try:
-            print("Iniciando almacenamiento de datos...")
             website = "https://tarifas.att.gob.bo/index.php/tarifaspizarra/tarifasInternetMovil"
             resultado = requests.get(website)
-            print("Solicitud HTTP completada con éxito.")
             content = resultado.text
             match = re.search(r'var\s+dataJSONArray\s*=\s*JSON\.parse\(\'(.*?)\'\);', content)
             if match:
                 json_data = match.group(1)
                 data = json.loads(json_data)
-                print("Datos JSON cargados exitosamente.")
                 cursor = conn.cursor()
                 cursor.execute("DELETE FROM sm_internet;")
                 conn.commit()
@@ -38,7 +35,6 @@ class Servicio_Movil_Internet():
                         int(float(servicio.get("VIGENCIA_BOLSA", 0) or 0)),  
                         servicio.get("UNIDAD_VIGENCIA_BOLSA", ""),  
                     ))
-                    print("Datos insertados correctamente en la tabla.")
                     conn.commit()
         except requests.RequestException as ex:
             print("Error durante la solicitud HTTP:", ex)
